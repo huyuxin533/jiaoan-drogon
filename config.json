@@ -1,0 +1,59 @@
+{
+  "listeners": [
+    {
+      "address": "0.0.0.0",
+      "port": 8080,
+      "https": false,
+      "client_max_body_size": "64M"
+    }
+  ],
+  "app": {
+    "threads_num": 4,
+    "enable_server_header": true,
+    "use_sendfile": false,
+    "log": {
+      "log_level": "DEBUG",
+      "log_path": "./logs",
+      "logfile_base_name": "lesson_server",
+      "log_size_limit": 100000000
+    }
+  },
+  "db_clients": [
+    {
+      "name": "default",
+      "rdbms": "mysql",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "dbname": "ai_lesson",
+      "user": "root",
+      "passwd": "123456",
+      "characterSet": "utf8mb4",
+      "timeout": 5.0,
+      "connectionNumber": 4
+    }
+  ],
+  "custom_config": {
+    "storage": {
+      "root_dir": "./uploads",
+      "max_file_size": 52428800,
+      "max_body_size": 67108864,
+      "allowed_extensions": ["pdf", "doc", "docx"]
+    },
+    "parse": {
+      "provider": "mock",
+      "mock": {
+        "success_rate": 0.8,
+        "min_delay_ms": 300,
+        "max_delay_ms": 1500,
+        "fail_keyword": "fail"
+      },
+      "real": {
+        "base_url": "",
+        "api_key": "",
+        "model": "qwen-plus",
+        "chat_path": "/v1/chat/completions",
+        "max_excerpt_bytes": 4096
+      }
+    }
+  }
+}
